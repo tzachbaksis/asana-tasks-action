@@ -9,10 +9,7 @@ const main = async () => {
     core.info(
         `Running action for PR' #${pr.number}: ${pr.body}`,
     )
-    core.info(
-        `debug: ${asanaToken}`,
-    )
-    const client = asana.Client.create().useAccessToken(asanaToken)
+    const client = await asana.Client.create().useAccessToken(asanaToken)
     const me = await client.users.me()
     core.info(`My name is: ${me.name}`)
 

@@ -73126,7 +73126,10 @@ const main = async () => {
     const asanaToken = core.getInput('asana_token', { required: true })
     const pr = github.context.payload.pull_request
     core.info(
-        `Running action for PR' #${pr.number}: ${pr.title}`,
+        `Running action for PR' #${pr.number}: ${pr.body}`,
+    )
+    core.info(
+        `debug: ${asanaToken}`,
     )
     const client = asana.Client.create().useAccessToken(asanaToken)
     const me = await client.users.me()

@@ -1,0 +1,10 @@
+name: 'Asana Tasks Action'
+description: 'Move linked Asana task section according to the PR status'
+inputs:
+  asana_token:
+    description: 'Asana Token'
+    required: true
+
+runs:
+  using: 'node16'
+  main: 'index.js'

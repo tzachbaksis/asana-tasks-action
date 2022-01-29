@@ -73125,15 +73125,17 @@ const main = async () => {
   try {
     const asanaToken = core.getInput('asana_token', { required: true })
     const pr = github.context.payload.pull_request
+    const isMerged = github.context.payload.pull_request.merged
+    const client = asana.Client.create().useAccessToken(asanaToken)
     core.info(
         `Running action for PR' #${pr.number}: ${pr.body}`,
     )
-    const client = await asana.Client.create().useAccessToken(asanaToken)
+    core.info(`is merged: ${isMerged}`)
     const me = await client.users.me()
     core.info(`My name is: ${me.name}`)
 
   } catch (error) {
-    core.setFailed(error.message);
+    core.setFailed(error.payload);
   }
 }
 

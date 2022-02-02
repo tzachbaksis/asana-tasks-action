@@ -73153,7 +73153,7 @@ const main = async () => {
         `Running action for PR #${pr.number}: ${pr.body}. Is merged: ${isMerged}.`,
     )
     const shortIds = getAsanaShortIds(pr.body)
-    console.log(shortIds)
+    core.info(shortIds.toString())
 
     const me = await client.users.me()
     core.info(`My name is: ${me.name}`)

@@ -1,5 +1,5 @@
 name: 'Asana Tasks Action'
-description: 'Move linked Asana task section according to the PR status'
+description: 'Mark Asana task as completed when PR gets merged'
 inputs:
   asana_token:
     description: 'Asana Token'

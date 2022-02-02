@@ -33,6 +33,7 @@ const main = async () => {
     core.info(
         `Running action for PR #${pr.number}: ${pr.body}. Is merged: ${isMerged}.`,
     )
+    core.info('before')
     const shortIds = getAsanaShortIds(pr.body)
     core.info(shortIds.toString())
 

@@ -30,8 +30,7 @@ const main = async () => {
     // if (!isMerged) return
 
     const taskIds = extractAsanaTaskIds(pr.body)
-    core.info(taskIds.toString())
-    for (const taskId in taskIds) {
+    for (const taskId of taskIds) {
       core.info(`Updating task: ${taskId} to be completed`)
       await client.tasks.updateTask(taskId, {
         completed: true

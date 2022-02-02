@@ -73121,25 +73121,21 @@ const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
 const asana = __nccwpck_require__(3565)
 
+ASANA_URL = 'https://app.asana.com'
+ASANA_TASK_REGEX = RegExp(`${ASANA_URL}/[0-9]/[0-9]*/([0-9]*)/.*`)
+
 const getAsanaShortIds = (body) => {
   if (!body) return null
-
-  body = body.replace(/ /g, '') // raw body
-
+  const taskIds = []
   const lines = body.split('\n')
   while (lines.length > 0) {
     const line = lines.shift()
-    if (startsWithAnyPrefix(line, commentPrefixes)) {
-      const resp = []
-      let matches
-      const reg = RegExp('https://app.asana.com/[0-9]/[0-9]*/[0-9]*', 'g')
-      while ((matches = reg.exec(line)) !== null) {
-        resp.push(...matches[0].split('/').slice(-1))
-      }
-      return resp
+    const possibleMatch = ASANA_TASK_REGEX.exec(line)
+    if (possibleMatch) {
+      taskIds.push(possibleMatch[1])
     }
   }
-  return []
+  return taskIds
 }
 
 
@@ -73154,8 +73150,8 @@ const main = async () => {
     )
     core.info('before')
     try {
-      const shortIds = getAsanaShortIds(pr.body)
-      core.info(shortIds.toString())
+      const ids = getAsanaShortIds(pr.body)
+      core.info(ids.toString())
     } catch (e) {
       console.error(e.payload)
     }

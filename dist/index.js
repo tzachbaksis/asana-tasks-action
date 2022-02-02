@@ -73128,8 +73128,10 @@ const getAsanaShortIds = (body) => {
   if (!body) return null
   const taskIds = []
   const lines = body.split('\n')
+  console.log(lines)
   while (lines.length > 0) {
     const line = lines.shift()
+    console.log(line)
     const possibleMatch = ASANA_TASK_REGEX.exec(line)
     if (possibleMatch) {
       taskIds.push(possibleMatch[1])

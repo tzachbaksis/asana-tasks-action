@@ -27,7 +27,7 @@ const main = async () => {
     const isMerged = github.context.payload.pull_request.merged
     core.info(`Running action for PR #${pr.number}: ${pr.body}`)
     core.info(`Is merged: ${isMerged}`)
-    // if (!isMerged) return
+    if (!isMerged) return
 
     const taskIds = extractAsanaTaskIds(pr.body)
     for (const taskId of taskIds) {
